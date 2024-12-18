@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Contraseña Restablecida</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styleLogin.css">
+</head>
+<body>
+<header>
+    <div class="nav-left">
+        <a href="/">Home</a>
+        <a href="/quienes-somos">Quiénes Somos</a>
+    </div>
+    <div class="nav-right">
+        <a href="/registro" class="btn-login">📩 Regístrate</a>
+        <a href="/login" class="btn-signup">🔑 Log in</a>
+    </div>
+</header>
+
+<div class="container mt-5">
+    <div class="form-container text-center">
+<div class="message-container">
+    <h2 th:text="${mensaje}"></h2>
+    <p>Ya puedes iniciar sesión con tu nueva contraseña.</p>
+    <a th:href="@{/login}" class="button">Volver al Login</a>
+</div>
+</body>
+</html>
+
+
+
+
+
+

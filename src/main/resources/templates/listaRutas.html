@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultados de Rutas de Senderismo</title>
+</head>
+<body>
+<div class="container">
+    <h1>Resultados de Rutas de Senderismo</h1>
+
+    <!-- Si hay resultados, mostrar la lista de rutas -->
+    <div th:if="${not #lists.isEmpty(rutas)}">
+        <div th:each="ruta : ${rutas}" class="ruta">
+            <h2 th:text="${ruta.nombre}"></h2>
+            <p><span>Comunidad:</span> <span th:text="${ruta.comunidad}"></span></p>
+            <p><span>Ubicación:</span> <span th:text="${ruta.ubicacion}"></span></p>
+            <p><span>Dificultad:</span> <span th:text="${ruta.dificultad}"></span></p>
+            <p><span>Duración:</span> <span th:text="${ruta.duracion}"></span> horas</p>
+            <p><span>Descripción:</span> <span th:text="${ruta.descripcion}"></span></p>
+
+            <!-- Botón para agregar ruta pendiente -->
+            <form th:action="@{/rutasPendientes/agregar}" method="post">
+                <input type="hidden" name="rutaId" th:value="${ruta.id}">
+                <button type="submit">Guardar como Pendiente</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Si no hay resultados, mostrar mensaje de error -->
+    <div th:if="${#lists.isEmpty(rutas)}" class="no-results">
+        <p th:text="${mensaje}">No hay datos disponibles para esta búsqueda. ¡Prueba con otros filtros!</p>
+    </div>
+
+    <!-- Enlace para regresar -->
+    <a href="/rutas" class="back-link">Volver al formulario</a>
+
+</div>
+</body>
+</html>

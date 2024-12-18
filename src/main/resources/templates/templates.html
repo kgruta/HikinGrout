@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error</title>
+    <link rel="stylesheet" href="/css/styleMensaje.css">
+</head>
+<body>
+<div class="message-container">
+    <h2 th:text="${mensaje}"></h2>
+    <p>Su tiempo ha expirado.</p>
+    <a th:href="@{/recuperar}" class="button">Solicitar nuevo enlace</a>
+</div>
+</body>
+</html>

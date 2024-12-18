@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Buscar Rutas de Senderismo</title>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Buscar Rutas de Senderismo</h1>
+    <form action="/rutas/filtrar" method="get">
+        <div class="form-group">
+            <label for="comunidad">Comunidad:</label>
+            <select name="comunidad" id="comunidad">
+                <option value="">Selecciona Comunidad</option>
+                <option value="Asturias">Asturias</option>
+                <option value="Madrid">Madrid</option>
+                <option value="Andalucía">Andalucía</option>
+                <option value="Aragón">Aragón</option>
+                <option value="Castilla y León">Castilla y León</option>
+                <option value="Castilla-La Mancha">Castilla-La Mancha</option>
+                <option value="Comunidad Valenciana">Comunidad Valenciana</option>
+                <option value="Cataluña">Cataluña</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="dificultad">Dificultad:</label>
+            <select name="dificultad" id="dificultad">
+                <option value="">Selecciona Dificultad</option>
+                <option value="FACIL">Fácil</option>
+                <option value="MODERADA">Moderada</option>
+                <option value="DIFICIL">Difícil</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="duracion">Duración (Horas):</label>
+            <select name="duracion" id="duracion">
+                <option value="">Selecciona Duración</option>
+                <option value="1">Más de 1 hora</option>
+                <option value="3">Más de 3 horas</option>
+                <option value="5">Más de 5 horas</option>
+            </select>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit">Buscar Rutas</button>
+        </div>
+    </form>
+    <div class="form-actions">
+        <a href="/rutas">Volver al Formulario Principal</a>
+    </div>
+</div>
+
+</body>
+</html>

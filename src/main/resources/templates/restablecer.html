@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restablecer Contraseña</title>
+    <link rel="stylesheet" href="/css/styleRestablecer.css">
+</head>
+<body>
+<div class="form-container">
+    <h2>Restablecer Contraseña</h2>
+    <form th:action="@{/restablecer}" method="post">
+        <input type="hidden" name="token" th:value="${token}">
+        <label for="nuevaContrasena">Nueva Contraseña:</label>
+        <input type="password" id="nuevaContrasena" name="nuevaContrasena" placeholder="Introduce tu nueva contraseña" required>
+        <button type="submit">Restablecer</button>
+    </form>
+</div>
+</body>
+</html>

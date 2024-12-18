@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Inicio de la Aplicación</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<h1>Bienvenido a la aplicación de Senderismo</h1>
+<p>Ahora que has iniciado sesión, puedes acceder a:</p>
+<ul>
+    <li><a href="/rutas">Buscar rutas</a></li>
+    <!-- Usar Thymeleaf para insertar dinámicamente el ID del usuario -->
+    <li><a th:href="@{/perfil/{id}(id=${usuarioActual.id})}">Ver tu perfil</a></li>
+    <li><a href="/rutasPendientes">Ver tus rutas pendientes</a></li>
+</ul>
+
+<!-- Botón para cerrar sesión -->
+<form th:action="@{/logout}" method="post">
+    <!-- Incluir Token CSRF para seguridad -->
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+    <button type="submit">Cerrar Sesión</button>
+</form>
+</body>
+</html>
