@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles de la Ruta - Senderismo</title>
+    <!-- Incluir el estilo de FontAwesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/css/styleDetalleRuta.css">
+    <style>
+        #map {
+            height: 500px;  /* Tamaño del mapa */
+            width: 100%;
+        }
+
+        .container {
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            width: 90%;
+            position: relative; /* Para que el botón esté dentro de la caja */
+        }
+
+        /* Detalles de la Ruta */
+        .route-details p {
+            margin-bottom: 15px;
+            font-size: 18px;
+            line-height: 1.6;
+            color: #444;
+        }
+
+        .route-details i {
+            color: #00A8AA;
+            margin-right: 10px;
+        }
+
+        /* Mapa Contenedor */
+        .map-container {
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+
+        .map-container h4 {
+            font-size: 1.8rem;
+            color: #035354;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .map-container p {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Enlace para Regresar dentro de la caja */
+        .back-link {
+            text-decoration: none;
+            font-size: 18px;
+            color: #ffffff;
+            background-color: #00A8AA;
+            border: 1px solid #00A8AA;
+            padding: 10px 20px;
+            border-radius: 8px;
+            display: inline-block;
+            position: absolute;
+            bottom: 20px; /* Ubicado en la parte inferior de la caja */
+            left: 50%; /* Centrado horizontal */
+            transform: translateX(-50%); /* Centrado exacto */
+        }
+
+        .back-link:hover {
+            background-color: #008B8B;
+            color: white;
+        }
+
+        /* Animación de Aparecer */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsividad: en pantallas pequeñas (max-width: 480px) */
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px;
+            }
+
+            .route-details p {
+                font-size: 14px;
+            }
+
+            .route-details i {
+                font-size: 1.2rem;
+            }
+
+            .route-info p {
+                font-size: 1.2rem;
+            }
+
+            .back-link {
+                font-size: 16px;
+                padding: 8px 15px;
+            }
+
+            /* Ajuste para las pantallas pequeñas */
+            #map {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Contenido principal -->
+<div class="container">
+    <h1 th:text="${ruta.nombre}">Nombre de la Ruta</h1>
+
+    <!-- Información completa de la ruta -->
+    <div class="route-details">
+        <p><i class="fas fa-map-marker-alt"></i><strong>Comunidad:</strong> <span th:text="${ruta.comunidad}"></span></p>
+        <p><i class="fas fa-map-pin"></i><strong>Ubicación:</strong> <span th:text="${ruta.ubicacion}"></span></p>
+        <p><i class="fas fa-tachometer-alt"></i><strong>Dificultad:</strong> <span th:text="${ruta.dificultad}"></span></p>
+        <p><i class="fas fa-clock"></i><strong>Duración:</strong> <span th:text="${ruta.duracion}"></span> horas</p>
+        <p><i class="fas fa-info-circle"></i><strong>Descripción:</strong> <span th:text="${ruta.descripcion}"></span></p>
+        <p><i class="fas fa-cogs"></i><strong>Tipo de Ruta:</strong> <span th:text="${ruta.tipoRuta}"></span></p>
+        <p><i class="fas fa-arrows-alt-v"></i><strong>Altitud Máxima:</strong> <span th:text="${ruta.altitudMaxima}"></span> metros</p>
+        <p><i class="fas fa-arrows-alt-h"></i><strong>Altitud Mínima:</strong> <span th:text="${ruta.altitudMinima}"></span> metros</p>
+        <p><i class="fas fa-road"></i><strong>Distancia:</strong> <span th:text="${ruta.distanciaKm}"></span> Km</p>
+        <p><i class="fas fa-star"></i><strong>Puntuación:</strong> <span th:text="${ruta.puntuacionMedia}"></span></p>
+        <p><i class="fas fa-calendar-alt"></i><strong>Epoca Recomendada:</strong> <span th:text="${ruta.epocaRecomendada}"></span></p>
+        <p><i class="fas fa-map-marked-alt"></i><strong>Puntos de Interés:</strong> <span th:text="${ruta.puntosInteres}"></span></p>
+        <p><i class="fas fa-concierge-bell"></i><strong>Servicios Cercanos:</strong> <span th:text="${ruta.serviciosCercanos}"></span></p>
+        <p><i class="fas fa-wheelchair"></i><strong>Accesibilidad:</strong> <span th:text="${ruta.accesibilidad}"></span></p>
+        <p><i class="fas fa-sign"></i><strong>Señalización:</strong> <span th:text="${ruta.senalizacion}"></span></p>
+    </div>
+
+    <!-- Mapa de la ruta -->
+    <div class="map-container">
+        <h4>Ubicación en el mapa</h4>
+        <p>Haz clic en el siguiente enlace para ver la ubicación en OpenStreetMap:</p>
+        <a href="#" id="mapLink" target="_blank" class="btn btn-primary">Ver en OpenStreetMap</a>
+    </div>
+
+    <!-- Botón de regreso -->
+    <a href="/rutas" class="back-link">Volver a la lista de rutas</a>
+</div>
+
+<script>
+    // Obtener la latitud y longitud de la ruta (se pasa desde el backend a través de Thymeleaf)
+    var latitud = [[${ruta.latitud}]];
+    var longitud = [[${ruta.longitud}]];
+
+    // Crear la URL dinámica de OpenStreetMap con latitud y longitud
+    var ubicacionUrl = "https://www.openstreetmap.org/?mlat=" + latitud + "&mlon=" + longitud;
+
+    // Asignar la URL al enlace para que el usuario pueda hacer clic y ver el mapa en OpenStreetMap
+    document.getElementById("mapLink").href = ubicacionUrl;
+</script>
+
+</body>
+</html>

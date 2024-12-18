@@ -1,64 +1,238 @@
+/* Fuente y reset básicos */
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Neue Haas Grotesk', 'Montserrat', sans-serif;
     margin: 0;
     padding: 0;
+    background: #f5f5f5;
+    color: #333;
+    overflow-x: hidden;
+}
+
+/* Fondo con degradado radial similar al inicial */
+body::before {
+    content: "";
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 600px;
+    height: 400px;
+    background: radial-gradient(circle at 30% 30%, rgba(164, 203, 2, 0.53), #2db5b7, #fff);
+    filter: blur(80px);
+    transform: translate(-50%, -50%);
+    opacity: 0.8;
+    z-index: -1;
+}
+
+/* Encabezado (menú) */
+header {
+    background: #fff;
     display: flex;
-    justify-content: center;
     align-items: center;
-    height: 100vh;
+    justify-content: space-between;
+    padding: 15px 40px;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.nav-left, .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-left a {
+    text-decoration: none;
+    font-size: 1.1rem;
+    color: #999;
+    transition: color 0.3s ease;
+}
+
+.nav-left a:hover {
+    color: #000;
+}
+
+.nav-left a:first-child {
+    color: #000;
+    font-weight: bold;
+}
+
+.btn-login, .btn-signup {
+    font-size: 1rem;
+    font-weight: 500;
+    border: 1px solid #000;
+    border-radius: 4px;
+    padding: 6px 14px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-login {
+    background: #fff;
+    color: #000;
+}
+
+.btn-login:hover {
+    background: #000;
+    color: #fff;
+}
+
+.btn-signup {
+    background: #000;
+    color: #fff;
+}
+
+.btn-signup:hover {
+    opacity: 0.9;
+}
+
+/* Contenedor del formulario */
+.form-container {
+    max-width: 400px;
+    margin: 3rem auto;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 2rem;
+    text-align: center;
+}
+
+/* Encabezado del formulario */
+.form-header h2 {
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.form-header p {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Grupos de formulario */
+.form-group {
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-size: 0.9rem;
+    font-weight: 600;
     color: #333;
 }
 
-.form-container {
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 30px;
-    max-width: 500px;
+.form-group input,
+.form-group select {
     width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
 }
 
-.form-header {
-    text-align: center;
-    margin-bottom: 30px;
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #000;
 }
 
-.form-header h2 {
-    font-size: 1.5rem;
-    color: #00a8aa;
-}
-
+/* Acordeón de cookies */
 .accordion-header {
-    background-color: #f8f9fa;
-    padding: 15px;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 8px;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 10px;
+    cursor: pointer;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #333;
 }
 
-.accordion-content {
+.accordion-content.hidden {
     display: none;
-    padding: 10px;
-    background-color: #ffffff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
 }
 
-.accordion-content.active {
-    display: block;
+.accordion-content p {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    color: #666;
 }
 
-button {
-    background-color: #00a8aa;
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
+.accordion-content label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+/* Pie del formulario */
+.form-footer {
+    margin-top: 1rem;
+}
+
+.form-footer button {
+    width: 100%;
+    padding: 0.7rem;
+    background: #000;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 600;
     cursor: pointer;
 }
 
-button:hover {
-    background-color: #008b8d;
+.form-footer button:hover {
+    opacity: 0.9;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 10px 20px;
+    }
+    .nav-left, .nav-right {
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+    .btn-login, .btn-signup {
+        font-size: 0.95rem;
+        padding: 5px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    .nav-left, .nav-right {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    .nav-left a,
+    .btn-login,
+    .btn-signup {
+        font-size: 1rem;
+        margin: 5px 0;
+    }
+    body {
+        font-size: 14px;
+    }
+
+    .form-container {
+        width: 90%;
+        margin: 2rem auto;
+        padding: 1.5rem;
+    }
+    .form-header h2 {
+        font-size: 1.5rem;
+    }
+    .form-footer button {
+        font-size: 1rem;
+        padding: 0.6rem;
+    }
 }

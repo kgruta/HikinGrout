@@ -1,0 +1,142 @@
+@font-face {
+    font-family: 'Neue Haas Grotesk';
+}
+
+@font-face {
+    font-family: 'Neue Haas Grotesk';
+    font-weight: 700;
+    font-style: normal;
+}
+
+body {
+    font-family: 'Neue Haas Grotesk', 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: radial-gradient(circle at center, rgba(0, 168, 170, 0.26), rgba(228, 252, 240, 0.31), #f5f5f5);
+    color: #333;
+    overflow-x: hidden;
+    font-size: 16px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: background 0.5s ease-in-out, opacity 1s ease-in-out;
+}
+
+/* Contenedor Principal */
+.container {
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 1.5s ease-out;
+    max-width: 1200px;
+    width: 90%;
+}
+
+/* Detalles de la Ruta */
+.route-details p {
+    margin-bottom: 15px;
+    font-size: 18px;
+    line-height: 1.6;
+    color: #444;
+    transition: transform 0.3s ease-in-out, color 0.3s ease;
+}
+
+.route-details i {
+    color: #00A8AA;
+    margin-right: 10px;
+}
+
+/* Efecto Hover sobre los detalles */
+.route-details p:hover {
+    transform: scale(1.05);
+    color: #00A8AA;
+}
+
+/* Enlace para Regresar */
+.back-link {
+    position: fixed;
+    bottom: 20px; /* Fijo en la parte inferior */
+    left: 50%;
+    transform: translateX(-50%); /* Centra el botón */
+    text-decoration: none;
+    font-size: 18px;
+    color: #ffffff;
+    background-color: #00A8AA;
+    border: 1px solid #00A8AA;
+    padding: 10px 20px;
+    border-radius: 8px;
+    display: inline-block;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    z-index: 100;
+}
+
+.back-link:hover {
+    background-color: #008B8B;
+    color: white;
+    transform: scale(1.05);
+}
+
+/* Mapa Contenedor */
+.map-container {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    animation: fadeInUp 1.5s ease-out;
+}
+
+.map-container h4 {
+    font-size: 1.8rem;
+    color: #035354;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.map-container p {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Animación de Aparecer */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsividad: en pantallas pequeñas (max-width: 480px) */
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+
+    .route-details p {
+        font-size: 14px;
+    }
+
+    .route-details i {
+        font-size: 1.2rem;
+    }
+
+    .route-info p {
+        font-size: 1.2rem;
+    }
+
+    .back-link {
+        font-size: 16px;
+        padding: 8px 15px;
+    }
+
+    /* Ajuste para las pantallas pequeñas */
+    #map {
+        height: 300px;
+    }
+}

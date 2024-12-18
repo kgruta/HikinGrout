@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gráfico de Ruta - HikingRout</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="/css/stylesGrafico.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f5f5f5;
+            color: rgba(255, 255, 255, 0);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: #00A8AA;
+            margin-bottom: 20px;
+        }
+
+        #graficoRuta {
+            max-width: 100%;
+            height: 400px;
+            margin-top: 30px;
+        }
+
+        .back-btn {
+            background-color: #00A8AA;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .back-btn:hover {
+            background-color: #008B8B;
+            transform: translateY(-2px);
+        }
+
+        .back-btn:active {
+            background-color: #006B6B;
+            transform: translateY(0);
+        }
+
+        .download-btn {
+            background-color: #8bd005;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .download-btn:hover {
+            background-color: #7a9703;
+            transform: translateY(-2px);
+        }
+
+        .download-btn:active {
+            background-color: #8bd005;
+            transform: translateY(0);
+        }
+
+        /* Responsivity */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .back-btn {
+                width: 100%;
+                padding: 12px;
+                font-size: 1.2rem;
+            }
+
+            #graficoRuta {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .back-btn {
+                padding: 12px;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Gráfico de Ruta -->
+<div class="container">
+    <h2>Gráfico de la Ruta: <span th:text="${ruta.nombre}">Nombre de la Ruta</span></h2>
+
+    <canvas id="graficoRuta"></canvas>
+
+    <script>
+        var ctx = document.getElementById('graficoRuta').getContext('2d');
+        var graficoRuta = new Chart(ctx, {
+            type: 'line', // Tipo de gráfico
+            data: {
+                labels: ['Distancia (km)', 'Desnivel Positivo (m)', 'Desnivel Negativo (m)', 'Altitud Máxima (m)', 'Altitud Mínima (m)'],
+                datasets: [{
+                    label: 'Datos de la Ruta',
+                    data: [
+                        [[${distancia}]],
+                        [[${desnivelPositivo}]],
+                        [[${desnivelNegativo}]],
+                        [[${altitudMaxima}]],
+                        [[${altitudMinima}]]
+                    ],
+                    borderColor: 'rgba(0, 168, 170, 1)', // Color del gráfico
+                    backgroundColor: 'rgba(0, 168, 170, 0.2)', // Fondo del gráfico
+                    borderWidth: 2,
+                    fill: true, // Rellenar el área debajo de la línea
+                    tension: 0.4 // Suavizar las líneas
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 100, // Ajustar la escala vertical
+                        },
+                        title: {
+                            display: true,
+                            text: 'Valores'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Parámetros'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            color: '#00A8AA'
+                        }
+                    }
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index',
+                }
+            }
+        });
+
+        // Función para descargar el gráfico como imagen en formato JPG
+        function downloadImage() {
+            // Obtener el canvas del gráfico
+            var canvas = document.getElementById('graficoRuta');
+            // Convertir a imagen JPG
+            var image = canvas.toDataURL('image/jpeg', 1.0);
+            // Crear un enlace para descargar la imagen
+            var link = document.createElement('a');
+            link.href = image;
+            link.download = 'graficoRuta.jpg';
+            link.click();
+        }
+    </script>
+
+    <!-- Botón para descargar el gráfico como imagen -->
+    <button class="download-btn" onclick="downloadImage()">Descargar Gráfico como JPG</button>
+
+    <!-- Back Button -->
+    <button type="button" class="back-btn" onclick="window.history.back();"> 🔙 Volver atrás</button>
+</div>
+
+</body>
+</html>

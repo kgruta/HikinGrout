@@ -3,27 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Buscar Rutas de Senderismo</title>
-    <style>
-
-    </style>
+    <link rel="stylesheet" href="/css/styleFormularioR.css">
 </head>
 <body>
 
 <div class="container">
     <h1>Buscar Rutas de Senderismo</h1>
-    <form action="/rutas/filtrar" method="get">
+    <form th:action="@{/rutas/filtrar}" method="get">
         <div class="form-group">
             <label for="comunidad">Comunidad:</label>
             <select name="comunidad" id="comunidad">
                 <option value="">Selecciona Comunidad</option>
-                <option value="Asturias">Asturias</option>
-                <option value="Madrid">Madrid</option>
                 <option value="Andalucía">Andalucía</option>
                 <option value="Aragón">Aragón</option>
+                <option value="Asturias">Asturias</option>
+                <option value="Baleares">Baleares</option>
+                <option value="Canarias">Canarias</option>
+                <option value="Cantabria">Cantabria</option>
                 <option value="Castilla y León">Castilla y León</option>
                 <option value="Castilla-La Mancha">Castilla-La Mancha</option>
-                <option value="Comunidad Valenciana">Comunidad Valenciana</option>
                 <option value="Cataluña">Cataluña</option>
+                <option value="Ceuta">Ceuta</option>
+                <option value="Extremadura">Extremadura</option>
+                <option value="Galicia">Galicia</option>
+                <option value="La Rioja">La Rioja</option>
+                <option value="Madrid">Madrid</option>
+                <option value="Melilla">Melilla</option>
+                <option value="Murcia">Murcia</option>
+                <option value="Navarra">Navarra</option>
+                <option value="País Vasco">País Vasco</option>
+                <option value="Valencia">Valencia</option>
             </select>
         </div>
 

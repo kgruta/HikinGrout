@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="'Perfil de ' + ${perfilUsuario.nombre}">Perfil</title>
+    <link rel="stylesheet" href="/css/stylesPerfil.css">
+
+</head>
+<body><!-- Menú principal -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/home">HikingRout</a>
+                    <a class="nav-link" th:href="@{/perfil/{id}(id=${usuarioActual.id})}">🏞️ Tus rutas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/configuracion">⚙️ Configuración</a>
+                </li>
+                <li class="nav-item">
+                    <form th:action="@{/logout}" method="post" class="d-inline">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                        <button type="submit" class="btn btn-link nav-link" style="padding: 0;">🚪 Cerrar sesión</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Perfil Usuario -->
+<header class="profile-header">
+    <h1 class="profile-name" th:text="${perfilUsuario.nombre}">Nombre</h1>
+    <nav class="tabs">
+        <a class="tab" th:classappend="${activeTab == 'realizadas' ? 'active' : ''}"
+           th:href="@{'/perfil/' + ${perfilUsuario.id} + '?tab=realizadas'}">Rutas Realizadas</a>
+        <a class="tab" th:classappend="${activeTab == 'pendientes' ? 'active' : ''}"
+           th:href="@{'/perfil/' + ${perfilUsuario.id} + '?tab=pendientes'}">Rutas Pendientes</a>
+    </nav>
+</header>
+
+<section class="routes">
+    <!-- Sección de Rutas Pendientes -->
+    <div th:if="${activeTab == 'pendientes'}">
+        <ul>
+            <li class="route-card" th:each="ruta : ${rutasPendientes}">
+                <h3 th:text="${ruta.nombre}">Nombre de la Ruta</h3>
+                <p><strong>Dificultad:</strong> <span th:text="${ruta.dificultad}">Moderada</span></p>
+                <p><strong>Duración:</strong> <span th:text="${ruta.duracion}">90</span> minutos</p>
+                <a class="button1" th:href="@{/perfil/pendientes/{id}/valorar(id=${ruta.id})}">
+                    Valorar y Marcar como Realizada
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Sección de Rutas Realizadas -->
+    <div th:if="${activeTab == 'realizadas'}">
+        <ul>
+            <li class="route-card" th:each="ruta : ${rutasRealizadas}">
+                <h3 th:text="${ruta.ruta.nombre}">Nombre de la Ruta</h3>
+                <p><strong>Dificultad:</strong> <span th:text="${ruta.ruta.dificultad}">Fácil</span></p>
+                <p><strong>Duración:</strong> <span th:text="${ruta.ruta.duracion}">90</span> minutos</p>
+                <p><strong>Comentario:</strong> <span th:text="${ruta.comentarios ?: 'Sin comentarios'}"></span></p>
+                <p><strong>Puntuación:</strong></p>
+                <div class="rating">
+                    <span th:each="i : ${#numbers.sequence(1, ruta.puntuacion)}">
+                        <span class="filled">⭐️</span>
+                    </span>
+                    <span th:each="i : ${#numbers.sequence(1, 5 - ruta.puntuacion)}">
+                        <span class="empty">☆</span>
+                    </span>
+                </div>
+            </li>
+        </ul>
+    </div>
+</section>
+</body>
+</html>
+
+
+

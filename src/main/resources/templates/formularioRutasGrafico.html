@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selecciona Ruta - HikingRout</title>
+    <link rel="stylesheet" href="/css/stylesGrafico.css">
+</head>
+<body>
+
+
+<!-- Formulario para seleccionar la ruta -->
+<div class="container mt-5">
+    <h2>Selecciona una Ruta para Ver el Gráfico</h2>
+    <form th:action="@{/graficoRuta}" method="get">
+        <label for="rutaId">Selecciona una ruta:</label>
+        <select id="rutaId" name="rutaId" class="form-control">
+            <option th:each="ruta : ${rutas}" th:value="${ruta.id}" th:text="${ruta.nombre}"></option>
+        </select>
+        <button type="submit" class="btn btn-primary mt-3">Generar Gráfico</button>
+        <br>
+        <button type="button" class="back-btn" onclick="window.history.back();"> 🔙 Volver atrás</button>
+    </form>
+</div>
+
+</body>
+</html>

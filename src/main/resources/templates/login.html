@@ -2,24 +2,64 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Iniciar Sesión</title>
+    <title>Iniciar Sesión - Hikingrout</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/styleLogin.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <script src="/js/jsLogin.js"></script>
 </head>
 <body>
-<div class="form-container">
-    <h2>Iniciar Sesión</h2>
-    <form th:action="@{/login}" method="post">
-        <label for="username">Correo Electrónico:</label>
-        <input type="text" id="username" name="username" required>
+<header>
+    <div class="nav-left">
+        <a href="/">Home</a>
+        <a href="/quienes-somos">Quiénes Somos</a>
+    </div>
+    <div class="nav-right">
+        <a href="/registro" class="btn-login">📩 Regístrate</a>
+        <a href="/login" class="btn-signup">🔑 Log in</a>
+    </div>
+</header>
 
-        <label for="password">Contraseña:</label>
-        <input type="password" id="password" name="password" required>
+<div class="container mt-5">
+    <div class="form-container">
+        <div class="form-header">
+            <h2>Iniciar Sesión</h2>
+        </div>
+        <form th:action="@{/login}" method="post" onsubmit="validateLoginForm(event)">
+            <!-- Campo de Correo Electrónico -->
+            <div class="form-group">
+                <label for="username">Correo Electrónico:</label>
+                <input type="text" id="username" name="username" class="form-control" placeholder="correo@ejemplo.com" required oninput="validateEmailInput(this)">
+                <div class="form-errors"></div>
+            </div>
 
-        <button type="submit">Entrar</button>
-    </form>
-    <div th:if="${param.error}">
-        <p style="color: red;">Hay algún dato incorrecto, compruebe el correo o la contraseña.</p>
+            <!-- Campo de Contraseña -->
+            <div class="form-group">
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="********" required oninput="validatePasswordInput(this)">
+                <div class="form-errors"></div>
+            </div>
+
+            <!-- Botón de Inicio de Sesión -->
+            <div class="form-footer mt-3">
+                <button type="submit" class="btn btn-primary w-100">Entrar</button>
+            </div>
+
+            <!-- Enlace para recuperar contraseña -->
+            <div class="mt-3 text-center">
+                <a href="/recuperar" class="text-decoration-none">¿Olvidaste tu contraseña?</a>
+            </div>
+
+            <!-- Mensaje de Error -->
+            <div th:if="${param.error}" class="mt-3">
+                <p class="text-danger">Hay algún dato incorrecto, compruebe el correo o la contraseña.</p>
+            </div>
+        </form>
     </div>
 </div>
+
 </body>
 </html>

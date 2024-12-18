@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estadísticas - HikingRout</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="/css/stylesEstadisticas.css">
+</head>
+<body>
+<!-- Menú principal -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/home">🏞️ Tus rutas</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <h2>Estadísticas de Rutas Realizadas</h2>
+
+    <div class="charts-container">
+        <!-- Gráfico de Distancia Total -->
+        <div class="chart-wrapper">
+            <h3>Distancia Total Recorrida (Km)</h3>
+            <canvas id="distanciaChart"></canvas>
+        </div>
+
+        <!-- Gráfico de Duración Total -->
+        <div class="chart-wrapper">
+            <h3>Duración Total (Minutos)</h3>
+            <canvas id="duracionChart"></canvas>
+        </div>
+    </div>
+
+    <div class="charts-container">
+        <!-- Gráfico de Desnivel Positivo -->
+        <div class="chart-wrapper">
+            <h3>Desnivel Positivo Total (Metros)</h3>
+            <canvas id="desnivelPositivoChart"></canvas>
+        </div>
+
+        <!-- Gráfico de Desnivel Negativo -->
+        <div class="chart-wrapper">
+            <h3>Desnivel Negativo Total (Metros)</h3>
+            <canvas id="desnivelNegativoChart"></canvas>
+        </div>
+    </div>
+
+    <button type="button" class="back-btn" onclick="window.history.back();"> 🔙 Volver atrás</button>
+</div>
+
+<script>
+    // Obtener las variables desde Thymeleaf
+    const distanciaTotal = [[${distanciaTotal}]];
+    const duracionTotal = [[${duracionTotal}]];
+    const desnivelPositivoTotal = [[${desnivelPositivoTotal}]];
+    const desnivelNegativoTotal = [[${desnivelNegativoTotal}]];
+
+    // Helper function to create a doughnut chart
+    function createDoughnutChart(canvasId, data, label) {
+        var ctx = document.getElementById(canvasId).getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: [label, 'Remaining'],
+                datasets: [{
+                    data: [data, 100 - data],
+                    backgroundColor: ['#00A8AA', '#f0f0f0'],
+                    borderWidth: 0,
+                }]
+            },
+            options: {
+                responsive: true,
+                cutoutPercentage: 80,
+                rotation: Math.PI,
+                plugins: {
+                    tooltip: {
+                        enabled: false
+                    },
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+    }
+
+    // Create the charts for each data
+    createDoughnutChart('distanciaChart', distanciaTotal, 'Distancia');
+    createDoughnutChart('duracionChart', duracionTotal, 'Duración');
+    createDoughnutChart('desnivelPositivoChart', desnivelPositivoTotal, 'Desnivel Positivo');
+    createDoughnutChart('desnivelNegativoChart', desnivelNegativoTotal, 'Desnivel Negativo');
+</script>
+</body>
+</html>

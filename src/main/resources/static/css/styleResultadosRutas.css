@@ -1,0 +1,178 @@
+/* Ajustes básicos */
+body {
+    font-family: 'Neue Haas Grotesk', 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f5f5f5;
+    color: #333;
+    font-size: 16px;
+}
+
+/* Fondo con degradado radial */
+body::before {
+    content: "";
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 600px;
+    height: 400px;
+    background: radial-gradient(circle at 30% 30%, rgba(240, 246, 0, 0.44), #00ff8c, #fff);
+    filter: blur(80px);
+    transform: translate(-50%, -50%);
+    opacity: 0.8;
+    z-index: -1;
+}
+
+/* Contenedor principal */
+.container {
+    max-width: 1200px;
+    margin: 3rem auto;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    text-align: center;
+}
+
+.container h1 {
+    font-weight: 700;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+}
+
+/* Contenedor de rutas */
+.routes-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Estilo de una ruta */
+.route-item {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.route-item:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Imagen de la ruta */
+.route-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+/* Información de la ruta */
+.route-info {
+    flex: 1;
+    text-align: left;
+}
+
+.route-info h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.route-info p {
+    margin: 0.5rem 0;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Acciones de la ruta */
+.route-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.route-details {
+    padding: 0.5rem 1rem;
+    background: #000;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.route-details:hover {
+    background: #333;
+}
+
+/* Mensaje de "no resultados" */
+.no-results {
+    margin-top: 2rem;
+}
+
+.no-results p {
+    font-size: 1rem;
+    color: #666;
+}
+
+/* Enlace para regresar */
+.back-link {
+    display: inline-block;
+    margin-top: 2rem;
+    text-decoration: none;
+    color: #999;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.back-link:hover {
+    color: #000;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .route-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .route-image {
+        width: 100%;
+        height: auto;
+    }
+
+    .route-info {
+        text-align: center;
+    }
+
+    .route-details {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: 100%;
+        margin: 1.5rem auto;
+        padding: 1rem;
+    }
+
+    .container h1 {
+        font-size: 1.5rem;
+    }
+
+    .route-details {
+        font-size: 0.9rem;
+        padding: 0.6rem;
+    }
+}

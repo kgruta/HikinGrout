@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Rutas de Senderismo - Hikingrout</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styleInico.css">
+
+</head>
+<body>
+
+<!-- Pantalla inicial -->
+<div class="intro">
+    <h2>BIENVENIDO 👋</h2>
+    <h1>HIKING ROUT</h1>
+</div>
+
+<!-- Encabezado -->
+<header>
+    <div class="nav-left">
+        <a href="#home">Home</a>
+    </div>
+    <div class="nav-right">
+        <a href="/registro" class="btn-login">📩 Regístrate</a>
+        <a href="/login" class="btn-signup">🔑 Log in</a>
+    </div>
+</header>
+
+<section class="hero" id="home">
+    <div class="hero-text-wrapper">
+        <p style="font-size: 1.2rem;">
+            Aquí encontrarás las mejores rutas de senderismo con toda la información esencial que necesitas:
+        </p>
+        <ul style="list-style: none; padding: 0; margin: 20px 0; text-align: center; font-size: 1.2rem;">
+            <li style="margin-bottom: 10px;">
+                <span style="font-size:1.6rem; display:inline-block; margin-right:10px;">🏞️</span>
+                <strong>Diversidad de entornos:</strong> Senderos costeros, cumbres elevadas y una gran variedad de paisajes.
+            </li>
+            <li style="margin-bottom: 10px;">
+                <span style="font-size:1.6rem; display:inline-block; margin-right:10px;"> ⛰️</span>
+                <strong>Datos prácticos:</strong> Consejos para mejorar tu experiencia y conocer tu progreso.
+            </li>
+            <li style="margin-bottom: 10px;">
+                <span style="font-size:1.6rem; display:inline-block; margin-right:10px;">🗺️</span>
+                <strong>Herramientas interactivas:</strong> Mapas y información detallada de tu experiencia.
+            </li>
+        </ul>
+        <p style="font-size: 1.2rem;">
+            Atrévete con nuevos retos, disfruta de paisajes únicos y sumérgete en la riqueza natural de la Península Ibérica.
+        </p>
+    </div>
+</section>
+
+<!-- Título dinámico de la sección -->
+<h2 class="section-title animated-title">Descubre Rutas Increíbles</h2>
+
+<!-- Ruta 1 -->
+<section class="route-section">
+    <figure class="route-image">
+        <img src="/images/rutas-senderismo-espana-somiedo.jpg" alt="Ruta de Somiedo">
+        <figcaption>
+            <i class="bi bi-image-fill"></i> Paisajes inolvidables
+        </figcaption>
+    </figure>
+    <div class="route-info">
+        <h5>Ruta de Somiedo</h5>
+        <div class="info-item"><i class="bi bi-geo-alt-fill"></i><strong>Ubicación:</strong> Parque Natural de Somiedo, Asturias</div>
+        <div class="info-item"><i class="bi bi-clock"></i><strong>Duración:</strong> 4-5 horas</div>
+        <div class="info-item"><i class="bi bi-bar-chart-fill"></i><strong>Dificultad:</strong> Moderada</div>
+        <p>Un recorrido espectacular por los lagos de montaña, rodeado de paisajes verdes y majestuosos.</p>
+    </div>
+</section>
+
+<!-- Ruta 2 -->
+<section class="route-section">
+    <div class="route-info">
+        <h5>Ruta del Caminito del Rey</h5>
+        <div class="info-item"><i class="bi bi-geo-alt-fill"></i><strong>Ubicación:</strong> Desfiladero de los Gaitanes, Málaga</div>
+        <div class="info-item"><i class="bi bi-clock"></i><strong>Duración:</strong> 3 horas</div>
+        <div class="info-item"><i class="bi bi-bar-chart-fill"></i><strong>Dificultad:</strong> Moderada</div>
+        <p>Una impresionante pasarela suspendida a lo largo de acantilados, con vistas vertiginosas y únicas.</p>
+    </div>
+    <figure class="route-image">
+        <img src="/images/como-hacer-el-caminto-del-rey.jpeg" alt="Ruta del Caminito del Rey">
+        <figcaption>
+            <i class="bi bi-image-fill"></i> Experiencia única
+        </figcaption>
+    </figure>
+</section>
+
+<!-- Rutas Populares y Gráfico -->
+<section class="features-container">
+    <div class="single-box">
+        <h3>Rutas Populares</h3>
+        <p>Explora rutas emocionantes que te conectarán con la naturaleza:</p>
+        <p><strong>Ruta del Bosque Encantado:</strong> Duración: 2 horas | Dificultad: Fácil</p>
+        <p><strong>Sendero de la Cascada Oculta:</strong> Duración: 3 horas | Dificultad: Moderada</p>
+        <p><strong>Travesía de la Montaña Dorada:</strong> Duración: 5 horas | Dificultad: Alta</p>
+    </div>
+
+    <div class="single-box">
+        <h3>Gráfico Semanal</h3>
+        <div class="chart-container">
+            <canvas id="weeklyComparisonChart"></canvas>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2024 Hikingrout. Todos los derechos reservados.</p>
+    <p><a href="/politica-cookies">Política de Cookies</a> | <a href="/informacion-legal">Información Legal</a></p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const intro = document.querySelector('.intro');
+    let introHidden = false;
+
+    // Cuando el usuario haga scroll, ocultar la intro
+    window.addEventListener('scroll', () => {
+        if (!introHidden && window.scrollY > 50) {
+            intro.classList.add('hidden');
+            introHidden = true;
+            setTimeout(() => {
+                intro.remove();
+            }, 900);
+        }
+    });
+
+    // Configuración del chart
+    const ctx = document.getElementById('weeklyComparisonChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'radar',
+        data: {
+            labels: ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"],
+            datasets: [{
+                label: "Rutas Completadas",
+                data: [2, 3, 5, 4, 6, 7],
+                backgroundColor: 'rgba(46, 125, 50, 0.2)',
+                borderColor: 'rgba(46, 125, 50, 1)',
+                borderWidth: 2,
+                pointBackgroundColor: 'rgba(46, 125, 50, 1)'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    });
+
+    // Esperamos un momento (1s) para mostrar el título con animación
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            document.querySelector('.section-title').classList.add('show');
+        }, 1000);
+    });
+
+    // Scroll Reveal para las secciones
+    window.addEventListener("scroll", () => {
+        document.querySelectorAll(".route-section").forEach((section) => {
+            if (section.getBoundingClientRect().top < window.innerHeight * 0.8) {
+                section.classList.add("show");
+            }
+        });
+    });
+</script>
+</body>
+</html>

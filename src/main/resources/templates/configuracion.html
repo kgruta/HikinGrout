@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Configuración - Editar Perfil</title>
+    <link rel="stylesheet" href="/css/stylesEditPerfil.css">
+</head>
+<body>
+<header>
+
+</header>
+
+<!-- Form Container -->
+
+<div class="form-container">
+    <h1 class="page-title">Editar Perfil</h1>
+    <form th:action="@{/configuracion}" th:object="${usuario}" method="post">
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" th:field="*{nombre}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="apellido">Apellido</label>
+            <input type="text" id="apellido" th:field="*{apellido}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Correo electrónico</label>
+            <input type="email" id="email" th:field="*{email}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="fechaNacimiento">Fecha de Nacimiento</label>
+            <input type="number" id="fechaNacimiento" th:field="*{fechaNacimiento}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="contrasena">Contraseña</label>
+            <input type="password" id="contrasena" th:field="*{contrasena}" required>
+        </div>
+
+        <button type="submit" class="submit-btn">Guardar cambios</button>
+    </form>
+
+    <!-- Success or Error message -->
+    <div th:if="${mensaje}" class="message-container">
+        <p th:text="${mensaje}" class="message-text"></p>
+    </div>
+
+    <!-- Back Button -->
+    <button type="button" class="back-btn" onclick="window.history.back();"> 🔙 Volver atrás</button>
+</div>
+
+</body>
+</html>

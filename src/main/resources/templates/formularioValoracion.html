@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Valorar Ruta</title>
+    <link rel="stylesheet" href="/css/styleValoracion.css">
+</head>
+<body>
+<section class="form-section">
+    <form th:action="@{/perfil/pendientes/{id}/realizar(id=${ruta.id})}" method="post">
+        <h2 th:text="${ruta.nombre}">Nombre de la Ruta</h2>
+        <label for="comentarios">Comentarios:</label>
+        <textarea id="comentarios" name="comentarios" required></textarea>
+
+        <label for="puntuacion">Puntuación:</label>
+        <select id="puntuacion" name="puntuacion" required>
+            <option value="1">1 ⭐️ - Muy Malo</option>
+            <option value="2">2 ⭐️⭐️ - Malo</option>
+            <option value="3">3 ⭐️⭐️⭐️ - Regular</option>
+            <option value="4">4 ⭐️⭐️⭐️⭐️ - Bueno</option>
+            <option value="5">5 ⭐️⭐️⭐️⭐️⭐️ - Excelente</option>
+        </select>
+
+        <button type="submit">Guardar Valoración</button>
+    </form>
+</section>
+</body>
+</html>

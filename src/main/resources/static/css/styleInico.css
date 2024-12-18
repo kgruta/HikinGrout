@@ -1,0 +1,427 @@
+
+@font-face {
+    font-family: 'Neue Haas Grotesk';
+}
+
+@font-face {
+    font-family: 'Neue Haas Grotesk';
+    font-weight: 700;
+    font-style: normal;
+}
+
+body {
+    font-family: 'Neue Haas Grotesk', 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f5f5f5;
+    color: #333;
+    overflow-x: hidden;
+    font-size: 16px;
+}
+
+/* Pantalla inicial (intro) */
+.intro {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: radial-gradient(circle at center, #00a8aa, #c2c509, #f5f5f5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.8s ease;
+}
+
+.intro h2 {
+    color: #fff;
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: 2px;
+}
+
+.intro h1 {
+    color: #fff;
+    font-size: 4rem;
+    font-weight: 700;
+    margin: 10px 0 0 0;
+    letter-spacing: 2px;
+}
+
+.intro.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Encabezado */
+header {
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-left a {
+    text-decoration: none;
+    font-size: 1rem;
+    color: #999;
+    transition: color 0.3s ease;
+}
+
+.nav-left a:hover {
+    color: #000;
+}
+
+/* "Home" destacado */
+.nav-left a:first-child {
+    color: #000;
+    font-weight: bold;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.btn-login, .btn-signup {
+    font-size: 1rem;
+    font-weight: 500;
+    border: 1px solid #000;
+    border-radius: 4px;
+    padding: 6px 14px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-login {
+    background: #fff;
+    color: #000;
+}
+
+.btn-login:hover {
+    background: #000;
+    color: #fff;
+}
+
+.btn-signup {
+    background: #000;
+    color: #fff;
+}
+
+.btn-signup:hover {
+    opacity: 0.9;
+}
+
+/* Responsividad: en pantallas pequeñas (max-width: 480px) en columna */
+@media (max-width: 480px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .nav-left, .nav-right {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px; /* Mayor espacio entre elementos en móvil */
+    }
+
+    .nav-left a, .btn-login, .btn-signup {
+        font-size: 1rem;
+        /* Añadimos margen vertical para separarlos mejor */
+        margin: 5px 0;
+    }
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    background: #f5f5f5;
+    padding: 2.5rem 1.25rem;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    width: 600px;
+    height: 400px;
+    background: radial-gradient(circle at 30% 30%, #bebe08, #ff6a00, #fff);
+    filter: blur(80px);
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    opacity: 0.8;
+}
+
+.hero h1, .hero h2 {
+    font-size: 4rem;
+    font-weight: 700;
+    margin: 0;
+    color: #111;
+}
+
+.hero-text-wrapper {
+    position: relative;
+    max-width: 600px;
+    margin: auto;
+}
+
+.hero-text-wrapper::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 250px;
+    height: 250px;
+    transform: translate(-50%, -50%);
+    opacity: 0.3;
+    z-index: 1;
+}
+
+.hero-text-wrapper p {
+    font-size: 1.2rem;
+    color: #333;
+    margin-top: 0.625rem;
+    line-height: 1.6;
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+/* Sección Rutas */
+.route-section {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    margin: 3rem auto;
+    max-width: 90%;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.route-section.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.route-section:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.route-image {
+    flex: 1;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.route-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    transition: transform 0.5s ease-in-out;
+    display: block;
+}
+
+.route-image img:hover {
+    transform: scale(1.05);
+}
+
+.route-image figcaption {
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 0.3125rem 0.625rem;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.route-info {
+    flex: 1;
+    background: #fff;
+    padding: 1.25rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.route-info h5 {
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.route-info p {
+    margin-bottom: 10px;
+}
+
+.route-info p strong {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.route-info .info-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 4px 0;
+}
+
+.features-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin: 3rem auto;
+    max-width: 90%;
+}
+
+.single-box {
+    flex: 1;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.single-box h3 {
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.chart-container {
+    margin-top: 20px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #f1f1f1;
+    font-size: 0.9rem;
+}
+
+footer a {
+    color: #333;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin: 50px 0 30px 0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+    font-weight: 700;
+}
+
+.section-title.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.route-section {
+    opacity: 0;
+    transform: translateY(50px);
+}
+
+.route-section.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* Para pantallas medianas (ej: tablets, hasta 768px) */
+@media (max-width: 768px) {
+    /* Ajustar el tamaño de la fuente en el menú */
+    .nav-left a,
+    .btn-login,
+    .btn-signup {
+        font-size: 0.95rem;
+    }
+
+    /* Ajustar padding del encabezado */
+    header {
+        padding: 10px 20px;
+    }
+
+    /* Si tienes elementos con ancho fijo, puedes forzarlos a ancho completo */
+    .features-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+@media (max-width: 480px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .nav-left, .nav-right {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .nav-left a, .btn-login, .btn-signup {
+        font-size: 1rem;
+        margin: 5px 0;
+    }
+
+    /* Ajuste para las secciones de rutas en pantallas pequeñas */
+    .route-section {
+        flex-direction: column !important;
+        align-items: flex-start;
+    }
+
+    .route-image, .route-info {
+        width: 100%;
+        margin: 0;
+    }
+
+    .route-image img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    /* Ajustar otros contenedores en columna si se desea */
+    .features-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    body {
+        font-size: 14px;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+}
